@@ -19,7 +19,7 @@ int main()
 	{
 		while( fgets(buffer,255,fptr) != NULL)
 		{
-			puts(buffer);
+			printf("%04x\n", buffer);
 		}
 		fclose(fptr);
 	}
