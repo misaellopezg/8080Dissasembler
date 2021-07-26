@@ -17,10 +17,18 @@ int main()
 	}
 	else
 	{
+<<<<<<< HEAD
 		while( fgets(buffer,255,fptr) != NULL)
 		{
 			printf("%04x\n", buffer);
 		}
+=======
+		//Seek to the beginning of the file
+		fseek(fp, 0, SEEK_SET);
+		//Read first two bytes of file
+		fread(buffer, 2,1,fptr);
+		printf("%s\n",buffer);
+>>>>>>> 2fd4abac119a585bd983ef7dc3bcc07e855ddf16
 		fclose(fptr);
 	}
 	
