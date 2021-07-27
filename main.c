@@ -4,11 +4,14 @@
 //Date: 07/15/2021
 #include <stdio.h>
 #include <stdlib.h>
+void printopcode(char c);
+
 int main()
 {
 	//Create file pointer
 	FILE *fptr;
-	unsigned char buffer[255];
+	unsigned char buffer;
+	int x = 0;
 	fptr = fopen("C:\\Users\\misael.lopez\\Desktop\\Dissasembler\\invaders.h","rb");
 	if(fptr == NULL)
 	{
@@ -17,20 +20,27 @@ int main()
 	}
 	else
 	{
-<<<<<<< HEAD
-		while( fgets(buffer,255,fptr) != NULL)
-		{
-			printf("%04x\n", buffer);
-		}
-=======
 		//Seek to the beginning of the file
-		fseek(fp, 0, SEEK_SET);
-		//Read first two bytes of file
-		fread(buffer, 2,1,fptr);
-		printf("%s\n",buffer);
->>>>>>> 2fd4abac119a585bd983ef7dc3bcc07e855ddf16
-		fclose(fptr);
+		fseek(fptr, 0, SEEK_SET);
+		//Read each character
+		while( feof(fptr) == 0)
+		{
+			buffer = fgetc(fptr);
+			printopcode(buffer);
+		}
 	}
-	
 	return 0;
+}
+
+void printopcode(char code)
+{
+	switch(code)
+	{
+		case 0x00:
+			printf("NOP\n");
+		case 0x01:
+			printf("LXI B,D16\n");
+		default:
+			printf("-\n");
+	}
 }
