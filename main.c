@@ -10,8 +10,10 @@ int main()
 {
 	//Create file pointer
 	FILE *fptr;
-	unsigned char buffer;
-	int x = 0;
+	//Create buffer and program counter
+	unsigned char *buffer;
+	unsigned int filesize, pc = 0;
+	//Open file; if failed, exit
 	fptr = fopen("C:\\Users\\misael.lopez\\Desktop\\Dissasembler\\invaders.h","rb");
 	if(fptr == NULL)
 	{
@@ -20,14 +22,14 @@ int main()
 	}
 	else
 	{
-		//Seek to the beginning of the file
+		//Find file size
+		fseek(fptr,0L,SEEK_END);
+		filesize = ftell(fptr);
 		fseek(fptr, 0, SEEK_SET);
-		//Read each character
-		while( feof(fptr) == 0)
-		{
-			buffer = fgetc(fptr);
-			printopcode(buffer);
-		}
+		//Store file in buffer
+		buffer = malloc(filesize);
+		fread(buffer,1,filesize,fptr);
+		fclose(fptr);
 	}
 	return 0;
 }
